@@ -2211,6 +2211,14 @@ class Program
         System.Console.WriteLine(N * 0);
         System.Console.WriteLine(1 * N);
         System.Console.WriteLine(N * 1);
+        System.Console.WriteLine(N & 0);
+        System.Console.WriteLine(0 & N);
+        System.Console.WriteLine(N | 0);
+        System.Console.WriteLine(0 | N);
+        System.Console.WriteLine(N & -1);
+        System.Console.WriteLine(-1 & N);
+        System.Console.WriteLine(N | -1);
+        System.Console.WriteLine(-1 | N);
     }
 }
 ";
@@ -2367,6 +2375,14 @@ class Program
         System.Console.WriteLine((int?)42 * 0);
         System.Console.WriteLine(1 * (int?)42);
         System.Console.WriteLine((int?)42 * 1);
+        System.Console.WriteLine(0 | (int?)42);
+        System.Console.WriteLine((int?)42 | 0);
+        System.Console.WriteLine(-1 | (int?)42);
+        System.Console.WriteLine((int?)42 | -1);
+        System.Console.WriteLine(0 & (int?)42);
+        System.Console.WriteLine((int?)42 & 0);
+        System.Console.WriteLine(-1 & (int?)42);
+        System.Console.WriteLine((int?)42 & -1);
     }
 }
 ";
