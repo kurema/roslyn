@@ -476,6 +476,50 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         goto default;
 
+                    case BinaryOperatorKind.IntAnd:
+                    case BinaryOperatorKind.LongAnd:
+                    case BinaryOperatorKind.UIntAnd:
+                    case BinaryOperatorKind.ULongAnd:
+                        if (loweredLeft.IsDefaultValue())
+                        {
+                            return loweredLeft;
+                        }
+                        if (loweredRight.IsDefaultValue())
+                        {
+                            return loweredRight;
+                        }
+                        if (loweredLeft.ConstantValue?.Int64Value == -1)
+                        {
+                            return loweredRight;
+                        }
+                        if (loweredRight.ConstantValue?.Int64Value == -1)
+                        {
+                            return loweredLeft;
+                        }
+                        goto default;
+                        
+                    case BinaryOperatorKind.IntOr:
+                    case BinaryOperatorKind.LongOr:
+                    case BinaryOperatorKind.UIntOr:
+                    case BinaryOperatorKind.ULongOr:
+                        if (loweredLeft.IsDefaultValue())
+                        {
+                            return loweredRight;
+                        }
+                        if (loweredRight.IsDefaultValue())
+                        {
+                            return loweredLeft;
+                        }
+                        if (loweredLeft.ConstantValue?.Int64Value == -1)
+                        {
+                            return loweredLeft;
+                        }
+                        if (loweredRight.ConstantValue?.Int64Value == -1)
+                        {
+                            return loweredRight;
+                        }
+                        goto default;
+                        
                     case BinaryOperatorKind.IntGreaterThan:
                     case BinaryOperatorKind.IntLessThanOrEqual:
                         if (loweredLeft.Kind == BoundKind.ArrayLength && loweredRight.IsDefaultValue())
